@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LanchoneteDBModelStoreContainer" CdmEntityContainer="LanchoneteDBEntities">
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="LanchoneteDBModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="NomeCategoria" ColumnName="NomeCategoria" />
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ingredientes">
+      <EntityTypeMapping TypeName="LanchoneteDBModel.Ingrediente">
+        <MappingFragment StoreEntitySet="Ingredientes">
+          <ScalarProperty Name="NomeIngrediente" ColumnName="NomeIngrediente" />
+          <ScalarProperty Name="IdIngrediente" ColumnName="IdIngrediente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
