@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Services.Description;
 
 namespace TADSLanchonete
@@ -25,6 +27,50 @@ namespace TADSLanchonete
                 mensagem = ex.Message;
             }
             return mensagem;
+        }
+
+        internal static string Excluir(int id)
+        {
+            string mensagem = "";
+            try
+            {
+                using (var ctx = new LanchoneteDBEntities())
+                {
+                    Categoria categoria = ctx.Categorias.FirstOrDefault(x => x.IdCategoria == id);
+                    ctx.Categorias.Remove(categoria);
+                    ctx.SaveChanges();
+
+                    mensagem = "A categoria " + categoria.NomeCategoria +
+                        " foi removida com suuuuuucessso!!";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                mensagem = ex.Message;
+            }
+            return mensagem;
+
+        }
+
+        internal static List<Categoria> Listar()
+        {
+            List<Categoria> categorias = null;
+
+            try
+            {
+                using (var ctx = new LanchoneteDBEntities())
+                {
+                    categorias = ctx.Categorias
+                        .OrderBy(x => x.NomeCategoria).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return categorias;
         }
     }
 }

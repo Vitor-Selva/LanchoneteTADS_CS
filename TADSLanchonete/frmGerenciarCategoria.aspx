@@ -4,11 +4,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
 </head>
 <body>
-        <header>
+    <header>
         <a href="Default.aspx">Início</a>
 
         <h1>Gerenciar Categorias</h1>
@@ -18,25 +18,62 @@
         <h2>Cadastrar Categoria</h2>
         <form id="form1" runat="server">
             <p>
-                <input 
-                    type="text" 
-                    id="txtNomeCategoria" 
+                <input
+                    type="text"
+                    id="txtNomeCategoria"
                     placeholder="Nome Categoria"
                     runat="server"
-                    required
                 />
             </p>
             <p>
-                <asp:Button 
-                    ID="btnConfirmar"   
+                <asp:Button
+                    ID="btnConfirmar"
                     Text="Cadastrar"
                     runat="server"
-                    onclick="btnConfirmar_Click"
-                 />
+                    OnClick="btnConfirmar_Click" />
             </p>
             <p>
                 <p id="Mensagem" runat="server"></p>
             </p>
+            <table border="1">
+                <head>
+                    <tr>
+                        <td>Código</td>
+                        <td>Descrição</td>
+                        <td>Ações</td>
+                    </tr>
+                </head>
+                <p>
+                    <asp:ListView runat="server" ID="lvCategorias" OnItemCommand="lvCategorias_ItemCommand">
+                        <EmptyItemTemplate>
+                            <p>Não existem categorias cadastradas!</p>
+                        </EmptyItemTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td>
+                                    <%# Eval("IdCategoria") %>
+                                </td>
+                                <td>
+                                    <%# Eval("NomeCategoria") %>
+                                </td>
+                                <td>
+                                    <asp:ImageButton
+                                        ImageUrl="~/img/visualizar.png"
+                                        runat="server" />
+                                    <asp:ImageButton
+                                        ImageUrl="~/img/editar.png"
+                                        runat="server" />
+                                    <asp:ImageButton
+                                        ImageUrl="~/img/Excluir.png"
+                                        runat="server" 
+                                        CommandName="Excluir"
+                                        CommandArgument='<%# Eval("IdCategoria") %>' />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:ListView>
+                </p>
+            </table>
         </form>
     </main>
 

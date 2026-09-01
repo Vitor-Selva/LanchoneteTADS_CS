@@ -11,7 +11,23 @@ namespace TADSLanchonete
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                AtualizarListViewCategorias();
+            }
+        }
 
+        private void AtualizarListViewCategorias()
+        {
+            List<Categoria> categorias =
+                CategoriaDAO.Listar();
+            PopularLvCategorias(categorias);
+        }
+
+        private void PopularLvCategorias(List<Categoria> categorias)
+        {
+            lvCategorias.DataSource = categorias;
+            lvCategorias.DataBind();
         }
 
         protected void btnConfirmar_Click(object sender, EventArgs e)
@@ -29,6 +45,7 @@ namespace TADSLanchonete
                 Mensagem.InnerText =
                     CategoriaDAO.Casdastrar(categoria);
                 txtNomeCategoria.Value = "";
+                AtualizarListViewCategorias();
             }
             catch (Exception ex)
             {
@@ -36,5 +53,29 @@ namespace TADSLanchonete
                         ex.Message;
             }
         }
+
+        protected void lvCategorias_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(e.CommandArgument.ToString());
+                if (id == null) { return; }
+                string comando = e.CommandName;
+
+                if (comando == "Excluir")
+                {
+                    string mensagem = CategoriaDAO.Excluir(id);
+                    Mensagem.InnerText = mensagem;
+                    AtualizarListViewCategorias();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
+
 }

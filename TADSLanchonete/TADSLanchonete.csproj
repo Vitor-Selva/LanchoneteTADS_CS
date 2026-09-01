@@ -82,6 +82,9 @@
     <Content Include="Default.aspx" />
     <Content Include="frmGerenciarCategoria.aspx" />
     <Content Include="frmGerenciarIngredientes.aspx" />
+    <Content Include="img\Editar.png" />
+    <Content Include="img\Excluir.png" />
+    <Content Include="img\Visualizar.png" />
     <Content Include="LanchoneteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LanchoneteModel.Context.cs</LastGenOutput>
@@ -92,11 +95,21 @@
       <DependentUpon>LanchoneteModel.edmx</DependentUpon>
       <LastGenOutput>LanchoneteModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categoria.cs">
-      <DependentUpon>LanchoneteModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="CategoriaDAO.cs" />
     <Compile Include="Default.aspx.cs">
@@ -121,7 +134,7 @@
       <DependentUpon>frmGerenciarIngredientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ingrediente.cs">
-      <DependentUpon>LanchoneteModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="IngredienteDAO.cs" />
     <Compile Include="LanchoneteModel.Context.cs">
@@ -139,6 +152,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanchoneteModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +176,13 @@
     </EntityDeploy>
     <Content Include="LanchoneteModel.edmx.diagram">
       <DependentUpon>LanchoneteModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
