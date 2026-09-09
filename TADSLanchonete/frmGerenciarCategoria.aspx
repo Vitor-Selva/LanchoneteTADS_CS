@@ -22,8 +22,7 @@
                     type="text"
                     id="txtNomeCategoria"
                     placeholder="Nome Categoria"
-                    runat="server"
-                />
+                    runat="server" />
             </p>
             <p>
                 <asp:Button
@@ -31,6 +30,9 @@
                     Text="Cadastrar"
                     runat="server"
                     OnClick="btnConfirmar_Click" />
+            </p>
+            <p>
+                <a href="~/frmGerenciarCategoria.aspx" runat="server" id="btnLinkCadastra" visible="false">Cadastrar Categoria</a>
             </p>
             <p>
                 <p id="Mensagem" runat="server"></p>
@@ -59,15 +61,23 @@
                                 <td>
                                     <asp:ImageButton
                                         ImageUrl="~/img/visualizar.png"
-                                        runat="server" />
+                                        runat="server"
+                                        CommandName="Visualizar"
+                                        CommandArgument='<%# Eval("IdCategoria") %>' />
                                     <asp:ImageButton
                                         ImageUrl="~/img/editar.png"
-                                        runat="server" />
+                                        runat="server" 
+                                        CommandName="Editar"
+                                        CommandArgument='<%# Eval("IdCategoria") %>'
+                                    />
                                     <asp:ImageButton
                                         ImageUrl="~/img/Excluir.png"
-                                        runat="server" 
+                                        runat="server"
                                         CommandName="Excluir"
-                                        CommandArgument='<%# Eval("IdCategoria") %>' />
+                                        CommandArgument='<%# Eval("IdCategoria") %>' 
+                                        OnClientClick=
+                                            "return confirm('Deseja realmente excluir esse ingrediente?')"    
+                                        />
                                 </td>
                             </tr>
                         </ItemTemplate>

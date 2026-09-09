@@ -74,12 +74,24 @@ namespace TADSLanchonete
                     string mensagem = IngredienteDAO.Excluir(id);
                     Mensagem.InnerText = mensagem;
                     AtualizarListViewIngrediente();
+                } else if(comando == "Visualizar")
+                {
+                    Ingrediente ingrediente = IngredienteDAO.Listar(id);
+                    ModificarFormularioParaVisualizar(ingrediente);
                 }
             }
             catch (Exception ex)
             {
 
             }
+        }
+
+        private void ModificarFormularioParaVisualizar(Ingrediente ingrediente)
+        {
+            txtNomeIngrediente.Disabled = false;
+            btnConfirmar.Enabled = false;
+            btnLinkCadastra.Visible = true;
+            txtNomeIngrediente.Value = ingrediente.NomeIngrediente;
         }
     }
 }

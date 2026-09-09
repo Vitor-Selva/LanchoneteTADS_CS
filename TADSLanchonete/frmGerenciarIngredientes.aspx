@@ -32,6 +32,9 @@
                     OnClick="btnConfirmar_Click" />
             </p>
             <p>
+                <a href="~/frmGerenciarIngredientes.aspx" runat="server" id="btnLinkCadastra" visible="false">Cadastrar Ingrediente</a>
+            </p>
+            <p>
                 <p id="Mensagem" runat="server"></p>
             </p>
 
@@ -56,18 +59,18 @@
                                 </td>
                                 <td>
                                     <asp:ImageButton
-                                        ImageUrl="~/img/visualizar.png" 
-                                        runat="server" 
-                                    />
-                                    <asp:ImageButton 
-                                        ImageUrl="~/img/editar.png" 
-                                        runat="server" 
-                                    />
-                                    <asp:ImageButton ImageUrl="~/img/excluir.png" 
-                                        runat="server" 
-                                        CommandName="Excluir" 
-                                        CommandArgument='<%# Eval("IdIngrediente") %>' 
-                                    />
+                                        ImageUrl="~/img/visualizar.png"
+                                        runat="server"
+                                        CommandName="Visualizar"
+                                        CommandArgument='<%# Eval("IdIngrediente") %>' />
+                                    <asp:ImageButton
+                                        ImageUrl="~/img/editar.png"
+                                        runat="server" />
+                                    <asp:ImageButton ImageUrl="~/img/excluir.png"
+                                        runat="server"
+                                        CommandName="Excluir"
+                                        CommandArgument='<%# Eval("IdIngrediente") %>'
+                                        OnClientClick="return confirm('Deseja realmente excluir essa Categoria?')" />
                                 </td>
                             </tr>
                         </ItemTemplate>

@@ -71,5 +71,19 @@ namespace TADSLanchonete
 
             return lista;
         }
+
+        internal static Ingrediente Listar(int id)
+        {
+            Ingrediente ingrediente = null;
+
+            using (var ctx = new LanchoneteDBEntities())
+            {
+                ingrediente = ctx.Ingredientes.FirstOrDefault(
+                    i => i.IdIngrediente.Equals(id)
+                );
+            }
+
+            return ingrediente;
+        }
     }
 }

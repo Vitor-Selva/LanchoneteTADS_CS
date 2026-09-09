@@ -29,6 +29,32 @@ namespace TADSLanchonete
             return mensagem;
         }
 
+        internal static string Editar(Categoria categoria)
+        {
+            string mensagem = "";
+
+            try
+            {
+                using (var ctx = new LanchoneteDBEntities())
+                {
+                    Categoria categoriaVelha = ctx.Categorias.FirstOrDefault(c => c.IdCategoria == categoria.IdCategoria);
+
+                    categoriaVelha.NomeCategoria = categoria.NomeCategoria;
+
+                    ctx.SaveChanges();
+                    mensagem = "A Categoria "
+                        + categoriaVelha.NomeCategoria
+                        + " foi alterada com sucesso";
+                }
+            }
+            catch (Exception ex)
+            {
+                mensagem = ex.Message;
+            }
+
+            return mensagem;
+        }
+
         internal static string Excluir(int id)
         {
             string mensagem = "";
@@ -71,6 +97,22 @@ namespace TADSLanchonete
             }
 
             return categorias;
+        }
+
+        internal static Categoria Listar(int id)
+        {
+            Categoria categoria = null;
+
+            using (var ctx = new LanchoneteDBEntities())
+            {
+                categoria = ctx.Categorias.FirstOrDefault(
+                  c => c.IdCategoria.Equals(id)
+                );
+
+                // LINQ TO ENTITIES
+            }
+
+            return categoria;
         }
     }
 }

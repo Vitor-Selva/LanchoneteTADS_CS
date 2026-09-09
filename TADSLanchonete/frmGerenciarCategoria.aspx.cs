@@ -35,15 +35,40 @@ namespace TADSLanchonete
             try
             {
                 string nomeCategoria = txtNomeCategoria.Value;
+                bool editando = false;
                 if (string.IsNullOrEmpty(nomeCategoria))
                 {
                     Mensagem.InnerText = "O campo Nome Categoria precisa ser preechido";
                     return;
                 }
-                var categoria = new Categoria();
+
+                Categoria categoria = null;
+
+                if (ViewState["IdCategoria"] == null)
+                {
+                    // Estou cadastrando uma nova categoria
+                    categoria = new Categoria();
+                }
+                else
+                {
+                    // Estou editando uma categoria existente
+                    int idCategoria = (int)ViewState["IdCategoria"];
+                    categoria = CategoriaDAO.Listar(idCategoria);
+                    editando = true;
+                }
                 categoria.NomeCategoria = nomeCategoria;
-                Mensagem.InnerText =
-                    CategoriaDAO.Casdastrar(categoria);
+
+                if (!editando)
+                {
+                    Mensagem.InnerText =
+                        CategoriaDAO.Casdastrar(categoria);
+                }
+                else
+                {
+                    Mensagem.InnerText = CategoriaDAO.Editar(categoria);
+                    btnConfirmar.Text = "Cadastrar";
+                    ViewState["IdCategoria"] = null;
+                }
                 txtNomeCategoria.Value = "";
                 AtualizarListViewCategorias();
             }
@@ -68,13 +93,49 @@ namespace TADSLanchonete
                     Mensagem.InnerText = mensagem;
                     AtualizarListViewCategorias();
                 }
+                else if (comando == "Visualizar")
+                {
+                    Categoria categoria = CategoriaDAO.Listar(id);
+
+                    bool visualizar = true;
+                    ModificarFormularioParaVisualizar(categoria, visualizar);
+                }
+                else if (comando == "Editar")
+                {
+                    Categoria categoria = CategoriaDAO.Listar(id);
+                    bool visualizar = false;
+                    ModificarFormularioParaVisualizar(categoria, visualizar);
+
+                    EditarFormulario(categoria);
+                }
 
             }
             catch (Exception ex)
             {
-
                 throw;
             }
+        }
+
+        private void EditarFormulario(Categoria categoria)
+        {
+            // Personalizando Botão
+            btnConfirmar.Text = "Alterar";
+            //btnConfirmar.Click -= btnConfirmar_Click;
+            //btnConfirmar.Click += btnEditar_Click; NÃO DEU CERTO ASSIM
+
+            ViewState["IdCategoria"] = categoria.IdCategoria;
+            Mensagem.InnerText = "";
+        }
+
+        private void ModificarFormularioParaVisualizar(Categoria categoria, bool visualizar)
+        {
+            if (visualizar)
+            {
+                txtNomeCategoria.Disabled = true;
+                btnConfirmar.Enabled = false;
+                btnLinkCadastra.Visible = true;
+            }
+            txtNomeCategoria.Value = categoria.NomeCategoria;
         }
     }
 
