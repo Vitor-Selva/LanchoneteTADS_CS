@@ -14,6 +14,19 @@ namespace TADSLanchonete
             if (!IsPostBack)
             {
                 AtualizarListViewCategorias();
+
+                string qs = Request.QueryString["id"];
+                if (!string.IsNullOrEmpty(qs))
+                {
+                    int id = int.Parse(qs);
+                    Categoria categoria = CategoriaDAO.Listar(id);
+                    if (categoria != null)
+                    {
+                        bool visualizar = false;
+                        ModificarFormularioParaVisualizar(categoria, visualizar);
+                        EditarFormulario(categoria);
+                    }
+                }
             }
         }
 
@@ -102,11 +115,15 @@ namespace TADSLanchonete
                 }
                 else if (comando == "Editar")
                 {
-                    Categoria categoria = CategoriaDAO.Listar(id);
-                    bool visualizar = false;
-                    ModificarFormularioParaVisualizar(categoria, visualizar);
+                    //Categoria categoria = CategoriaDAO.Listar(id);
+                    //bool visualizar = false;
+                    //ModificarFormularioParaVisualizar(categoria, visualizar);
 
-                    EditarFormulario(categoria);
+                    //EditarFormulario(categoria);
+
+                    string url = "~/frmGerenciarCategoria.aspx?id=" + id;
+
+                    Response.Redirect(url);
                 }
 
             }

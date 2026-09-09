@@ -66,18 +66,15 @@
                                         CommandArgument='<%# Eval("IdCategoria") %>' />
                                     <asp:ImageButton
                                         ImageUrl="~/img/editar.png"
-                                        runat="server" 
+                                        runat="server"
                                         CommandName="Editar"
-                                        CommandArgument='<%# Eval("IdCategoria") %>'
-                                    />
+                                        CommandArgument='<%# Eval("IdCategoria") %>' />
                                     <asp:ImageButton
                                         ImageUrl="~/img/Excluir.png"
                                         runat="server"
                                         CommandName="Excluir"
-                                        CommandArgument='<%# Eval("IdCategoria") %>' 
-                                        OnClientClick=
-                                            "return confirm('Deseja realmente excluir esse ingrediente?')"    
-                                        />
+                                        CommandArgument='<%# Eval("IdCategoria") %>'
+                                        OnClientClick="return confirm('Deseja realmente excluir esse ingrediente?')" />
                                 </td>
                             </tr>
                         </ItemTemplate>
